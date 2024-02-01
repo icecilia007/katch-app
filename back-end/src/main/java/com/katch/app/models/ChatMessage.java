@@ -1,4 +1,4 @@
-package com.katch.app.chat;
+package com.katch.app.models;
 
 import lombok.*;
 
@@ -7,8 +7,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ChatMessage {
+public abstract class ChatMessage {
+    private String senderId;
     private String content;
-    private String sender;
     private MessageType type;
 }

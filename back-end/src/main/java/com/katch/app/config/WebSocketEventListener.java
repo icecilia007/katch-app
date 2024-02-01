@@ -1,13 +1,12 @@
 package com.katch.app.config;
 
-import com.katch.app.chat.ChatMessage;
-import com.katch.app.chat.MessageType;
+import com.katch.app.models.MessageType;
+import com.katch.app.models.PublicMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
-import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
@@ -24,9 +23,9 @@ public class WebSocketEventListener {
         String username = (String) headerAccessor.getSessionAttributes().get("username");
         if(!username.isEmpty()){
             log.info("User disconnected: {}", username);
-            var chatMessage = ChatMessage.builder()
+            var chatMessage = PublicMessage.builder()
                     .type(MessageType.LEAVE)
-                    .sender(username)
+                    .senderId(username)
                     .build();
             messageTemplate.convertAndSend("/topic/public", chatMessage);
         }

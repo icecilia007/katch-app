@@ -1,4 +1,4 @@
-package com.katch.app.chat;
+package com.katch.app.models;
 
 public enum MessageType {
     CHAT,
