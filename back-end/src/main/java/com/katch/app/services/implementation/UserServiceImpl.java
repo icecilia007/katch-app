@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     public void disconnect(User user) {
         User storedUser = userRepository.findById(user.getNickName()).orElse(null);
         if(storedUser!=null){
-            storedUser.setStatus(Status.ONLINE);
+            storedUser.setStatus(Status.OFFLINE);
             userRepository.save(storedUser);
         }
     }

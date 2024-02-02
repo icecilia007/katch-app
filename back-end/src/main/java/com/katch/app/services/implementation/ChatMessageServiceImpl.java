@@ -19,7 +19,7 @@ public class ChatMessageServiceImpl implements ChatMessageService {
     public PrivateMessage save(PrivateMessage chatMessage) {
         var chatId = chatRoomService
                 .getChatRoomId(chatMessage.getSenderId(), chatMessage.getRecipientId(), true)
-                .orElseThrow(); // You can create your own dedicated exception
+                .orElseThrow();
         chatMessage.setChatId(chatId);
         repository.save(chatMessage);
         return chatMessage;
